@@ -1,0 +1,13 @@
+spring-boot/**/target/
+spring-boot/**/.mvn/
+!spring-boot/**/src/main/**/target/
+!spring-boot/**/src/test/**/target/
+
+### STS ###
+spring-boot/**/.apt_generated
+spring-boot/**/.classpath
+spring-boot/**/.factorypath
+spring-boot/**/.project
+spring-boot/**/.settings
+spring-boot/**/.springBeans
+spring-boot/**/.sts4-cache

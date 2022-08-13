@@ -1,0 +1,71 @@
+spring:
+  config:
+    activate:
+      on-profile:
+      - local-sts
+ 
+  security:
+    user:
+      name: john
+      password: password
+
+        
+  datasource:
+    url: "jdbc:postgresql://localhost:5432/db"
+    username: john
+    password: passwd
+    
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+---
+spring:
+  config:
+    activate:
+      on-profile:
+      - microk8s
+
+  security:
+    user:
+      name: john
+      password: password
+
+        
+  datasource:
+    #url: "jdbc:postgresql://jpadb:5432/jpa"
+    #url: "jdbc:postgresql://jpadb.default.svc.cluster.local:5432/jpa"
+    url: "jdbc:postgresql://jpadb-postgresql.postgres.svc.cluster.local:5432/jpa"
+    username: john
+    password: pass
+    
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+      
+management:
+      
+  endpoints:
+    web:
+      exposure:
+        include:
+        - env
+        - info
+        - health
+        - metrics
+        - prometheus
+  endpoint:
+    env:
+      enabled: true
+    info:
+      enabled: true
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+    health:
+      probes:
+        enabled: true
+      #enabled: true 
+    

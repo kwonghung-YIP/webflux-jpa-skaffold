@@ -1,0 +1,26 @@
+apiVersion: skaffold/v2beta29
+kind: Config
+build:
+  artifacts:
+  - image: localhost:32000/webflux-jpa
+    context: spring-boot/webflux-jpa
+    jib:
+      type: maven
+  insecureRegistries: ["localhost:32000"]
+deploy:
+  kubectl:
+    manifests: ["k8s/webflux-jpa.yaml"]
+  helm:
+    releases:
+      - name: jpadb
+        namespace: postgres
+        createNamespace: true
+        #chartPath: bitnami/postgresql
+        remoteChart: postgresql
+        repo: https://charts.bitnami.com/bitnami
+        # for the bitnami postgresql helm chart parameters, please refer
+        # https://github.com/bitnami/charts/tree/master/bitnami/postgresql
+        setValues:
+          auth.username: john
+          auth.password: pass
+          auth.database: jpa
