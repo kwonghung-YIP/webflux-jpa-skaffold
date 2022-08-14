@@ -51,7 +51,29 @@ spec:
             memory: "128Mi"
             cpu: "500m"
         ports:
-        - containerPort: 8080
+        - name: http
+          containerPort: 8080
+        - name: actuator
+          containerPort: 8090
         env:
           - name: SPRING_PROFILES_ACTIVE
             value: microk8s
+
+        readinessProbe:
+          httpGet:
+            port: actuator
+            path: /actuator/health/readiness
+          initialDelaySeconds: 60
+          periodSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3
+
+        livenessProbe:
+          httpGet:
+            port: actuator
+            path: /actuator/health/liveness
+          initialDelaySeconds: 60
+          periodSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3
+          

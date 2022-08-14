@@ -45,7 +45,8 @@ spring:
       ddl-auto: create
       
 management:
-      
+  server:
+    port: 8090
   endpoints:
     web:
       exposure:
