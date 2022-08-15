@@ -19,6 +19,16 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: create
+      
+server:
+  http2:
+    enabled: true
+    
+logging:
+  level:
+    web: debug
+    '[reactor.netty]': debug
+    '[io.netty]': debug 
 ---
 spring:
   config:
@@ -43,7 +53,11 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: create
-      
+
+server:
+  http2:
+    enabled: true
+          
 management:
   server:
     port: 8090
@@ -69,4 +83,10 @@ management:
       probes:
         enabled: true
       #enabled: true 
+      
+logging:
+  level:
+    web: debug
+    '[reactor.netty]': debug
+    '[io.netty]': debug 
     
