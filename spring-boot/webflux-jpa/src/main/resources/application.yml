@@ -23,12 +23,43 @@ spring:
 server:
   http2:
     enabled: true
+  ssl:
+    enabled: true
+    key-store: classpath:selfsigned.p12
+    key-store-type: PKCS12
+    key-store-password: abcd1234
     
 logging:
   level:
-    web: debug
-    '[reactor.netty]': debug
+    #web: debug
+    #'[reactor.netty]': debug
     '[io.netty]': debug 
+
+management:
+  server:
+    port: 8090
+  endpoints:
+    web:
+      exposure:
+        include:
+        - env
+        - info
+        - health
+        - metrics
+        - prometheus
+  endpoint:
+    env:
+      enabled: true
+    info:
+      enabled: true
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+    health:
+      probes:
+        enabled: true
+      #enabled: true 
 ---
 spring:
   config:
